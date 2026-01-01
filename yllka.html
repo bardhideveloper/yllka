@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="sq">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Për YLLKËN ❤️</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298, #6a11cb);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: #f5f7ff;
+        }
+
+        .card {
+            background: rgba(10, 20, 40, 0.55);
+            backdrop-filter: blur(14px);
+            padding: 26px 22px;
+            border-radius: 22px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+            width: 92%;
+            max-width: 380px;
+            animation: fadeIn 1.6s ease;
+        }
+
+        h1 {
+            font-size: 1.9rem;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        p {
+            font-size: 1rem;
+            margin: 8px 0;
+            line-height: 1.4;
+        }
+
+        .countdown {
+            margin-top: 14px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #cfe0ff;
+        }
+
+        button {
+            margin-top: 18px;
+            padding: 10px 22px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: #0b1a2a;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .heart {
+            position: absolute;
+            color: #cfe0ff;
+            font-size: 18px;
+            animation: floatUp 6s linear infinite;
+            opacity: 0.85;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes floatUp {
+            from {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            to {
+                transform: translateY(-10vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>Për YLLKËN ❤️</h1>
+        <p>Ky mesazh është vetëm për ty…</p>
+        <p id="message">Kliko poshtë 💙</p>
+
+        <div class="countdown" id="countdown"></div>
+
+        <button onclick="surprise()">Surprizë</button>
+
+        <!-- Muzika jote: vendose skedarin MP3 në të njëjtin folder dhe ndrysho emrin më poshtë -->
+        <audio id="music" loop>
+            <source src="enderr-jete-ilir-shaqiri.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script>
+        const messages = [
+            "YLLKË, ti je ëndrra që dua ta jetoj çdo ditë 💙",
+            "Me ty gjithçka bëhet më e qetë dhe më e bukur ✨",
+            "Zemra ime e di saktë kë zgjedh – ty ❤️",
+            "Çdo kujtim me ty ka ngjyrat më të bukura 🌌",
+            "Je arsyeja pse besoj te dashuria 💫",
+            "Me ty, e ardhmja duket më e ndritshme 🌠",
+            "Në çdo hap, dua të jem pranë teje 🤍",
+            "Ti je shtëpia ime emocionale 🏡",
+            "Çdo rrahje zemre ka emrin tënd 💞",
+            "Të dua në mënyrën më të qetë dhe më të sinqertë 🌙"
+        ];
+
+        function surprise() {
+            const msg = messages[Math.floor(Math.random() * messages.length)];
+            document.getElementById('message').textContent = msg;
+            createHeart();
+            document.getElementById('music').play();
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.textContent = '💙';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = 4 + Math.random() * 3 + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 7000);
+        }
+
+        setInterval(createHeart, 1000);
+
+        // Countdown – data: 19.06.2026
+        const targetDate = new Date('2026-06-19T00:00:00');
+
+        function updateCountdown() {
+            const now = new Date();
+            const diff = targetDate - now;
+
+            if (diff <= 0) {
+                document.getElementById('countdown').textContent = 'Sot është dita jonë ❤️';
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+
+            document.getElementById('countdown').textContent =
+                `${days} ditë • ${hours} orë • ${minutes} minuta`;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+
+</html>
